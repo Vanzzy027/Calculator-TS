@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    // 1. Output settings
+    "rootDir": "./src",
+    "outDir": "./dist",
+    
+    // 2. Target modern JS features that include .includes()
+    "target": "ES2020", // Explicitly supports Array and String .includes()
+    "module": "CommonJS", // A common module system for quick setup
+    
+    // 💡 THE ESSENTIAL FIX: Include the required library definitions
+    "lib": [
+      "dom",         // Provides types for browser APIs (document, HTMLInputElement, etc.)
+      "dom.iterable",
+      "es2020"       // Provides type definitions for modern JS methods like .includes()
+    ],
+    
+    // 3. Recommended settings
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true 
+  },
+  "include": [
+    "./src/**/*.ts"
+  ]
+}

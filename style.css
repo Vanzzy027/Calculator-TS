@@ -1,0 +1,288 @@
+/* ==================================
+    Theme 1: Default (Dark Blue/Grey)
+   ================================== */
+:root {
+    /* Body & Structure */
+    --main-bg: hsl(222, 26%, 31%);
+    --keypad-bg: hsl(223, 31%, 20%);
+    --screen-bg: hsl(224, 36%, 15%);
+
+    /* Primary Keys (Numbers, Operators) */
+    --key-primary-bg: hsl(30, 25%, 89%);
+    --key-primary-shadow: hsl(28, 16%, 65%);
+    --key-primary-text: hsl(221, 14%, 31%);
+
+    /* Secondary Keys (DEL, RESET) */
+    --key-secondary-bg: hsl(225, 21%, 49%);
+    --key-secondary-shadow: hsl(224, 28%, 35%);
+    --key-secondary-text: #ffffff;
+
+    /* Equal Key */
+    --key-equal-bg: hsl(6, 63%, 50%);
+    --key-equal-shadow: hsl(6, 70%, 34%);
+    --key-equal-text: #ffffff;
+
+    /* Text */
+    --text-primary: #ffffff;
+}
+
+/* ==================================
+    Theme 2: Light (Grey/Red/Cyan)
+   ================================== */
+body[data-theme="theme-2"] {
+    /* Body & Structure */
+    --main-bg: hsl(0, 0%, 90%);
+    --keypad-bg: hsl(0, 5%, 81%);
+    --screen-bg: hsl(0, 0%, 93%);
+
+    /* Primary Keys (Numbers, Operators) */
+    --key-primary-bg: hsl(45, 7%, 89%);
+    --key-primary-shadow: hsl(35, 11%, 61%);
+    --key-primary-text: hsl(60, 10%, 19%);
+
+    /* Secondary Keys (DEL, RESET) */
+    --key-secondary-bg: hsl(185, 42%, 37%);
+    --key-secondary-shadow: hsl(185, 58%, 25%);
+    --key-secondary-text: #ffffff;
+
+    /* Equal Key */
+    --key-equal-bg: hsl(25, 98%, 40%);
+    --key-equal-shadow: hsl(25, 99%, 27%);
+    --key-equal-text: #ffffff;
+
+    /* Text */
+    --text-primary: hsl(60, 10%, 19%);
+}
+
+/* ==================================
+    Theme 3: Dark Violet/Pink
+   ================================== */
+body[data-theme="theme-3"] {
+    /* Body & Structure */
+    --main-bg: hsl(268, 75%, 9%);
+    --keypad-bg: hsl(268, 71%, 12%);
+    --screen-bg: hsl(268, 71%, 12%);
+
+    /* Primary Keys (Numbers, Operators) */
+    --key-primary-bg: hsl(281, 89%, 27%);
+    --key-primary-shadow: hsl(290, 70%, 36%);
+    --key-primary-text: hsl(52, 100%, 62%);
+
+    /* Secondary Keys (DEL, RESET) */
+    --key-secondary-bg: hsl(268, 47%, 21%);
+    --key-secondary-shadow: hsl(290, 70%, 36%);
+    --key-secondary-text: #ffffff;
+
+    /* Equal Key */
+    --key-equal-bg: hsl(176, 100%, 44%);
+    --key-equal-shadow: hsl(177, 92%, 70%);
+    --key-equal-text: hsl(198, 20%, 13%);
+
+    /* Text */
+    --text-primary: hsl(52, 100%, 62%);
+}
+
+/* ==================================
+    Global & Base Styles
+   ================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Spartan', sans-serif;
+    transition: background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease;
+}
+
+body {
+    background-color: var(--main-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.CONTAINER {
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Top Section */
+.top {
+    display: flex;
+    align-items: flex-end; /* Align calc, THEME, and switch */
+    justify-content: space-between;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.top h2 {
+    font-size: 32px;
+}
+
+/* Theme Switch Styling */
+.theme-switch-container {
+    display: flex;
+    align-items: center;
+}
+
+.top h1 {
+    font-size: 12px;
+    margin-right: 15px;
+    letter-spacing: 1px;
+    margin-bottom: 3px; /* visual alignment */
+}
+
+.toggle-track {
+    width: 70px;
+    height: 26px;
+    background-color: var(--keypad-bg);
+    border-radius: 999px;
+    padding: 3px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.theme-label {
+    font-size: 12px;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1; /* Keep numbers visible */
+    cursor: pointer;
+}
+
+.toggle-btn {
+    position: absolute;
+    top: 3px;
+    height: 20px;
+    width: 20px;
+    background-color: var(--key-equal-bg); /* Use equal key color for the toggle */
+    border-radius: 50%;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Theme Toggle Positions (controlled by TS adding classes) */
+.toggle-track[data-position="1"] .toggle-btn { transform: translateX(0); }
+.toggle-track[data-position="2"] .toggle-btn { transform: translateX(22px); }
+.toggle-track[data-position="3"] .toggle-btn { transform: translateX(44px); }
+
+/* Display */
+#displayInput {
+    width: 100%;
+    height: 90px;
+    background-color: var(--screen-bg);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-size: 48px;
+    text-align: right;
+    margin-bottom: 20px;
+    outline: none;
+    caret-color: transparent;
+    overflow: hidden; /* important for long results */
+}
+
+/* Keypad Grid Container */
+.inputs {
+    background-color: var(--keypad-bg);
+    padding: 25px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+/* Generic Button Styles */
+.inputs button {
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    font-size: 28px;
+    font-weight: bold;
+    height: 60px;
+    border-radius: 8px;
+    line-height: 60px;
+    text-align: center;
+    user-select: none;
+}
+
+/* Primary Keys (Numbers, +, -, /, x, .) */
+.key-primary {
+    background-color: var(--key-primary-bg);
+    color: var(--key-primary-text);
+    box-shadow: 0 4px 0 var(--key-primary-shadow);
+}
+
+.key-primary:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--key-primary-shadow);
+}
+
+/* Secondary Keys (DEL, RESET) */
+.key-secondary {
+    background-color: var(--key-secondary-bg);
+    box-shadow: 0 4px 0 var(--key-secondary-shadow);
+    color: var(--key-secondary-text);
+    font-size: 20px;
+    line-height: 60px;
+}
+
+.key-secondary:active {
+    box-shadow: 0 2px 0 var(--key-secondary-shadow);
+}
+
+/* Equal Key */
+.key-equal {
+    background-color: var(--key-equal-bg);
+    box-shadow: 0 4px 0 var(--key-equal-shadow);
+    color: var(--key-equal-text);
+}
+
+.key-equal:active {
+    box-shadow: 0 2px 0 var(--key-equal-shadow);
+}
+
+/* Large Keys (RESET, EQUALS) */
+.key-large {
+    grid-column: span 2;
+}
+
+/* ==================================
+    Responsiveness (Theme 2 for smaller screens)
+   ================================== */
+@media (max-width: 650px) {
+    /* Apply Theme 2 as the default for mobile, overriding the :root/Theme 1 */
+    body:not([data-theme="theme-3"]) { /* Apply if not theme-3 (violet) */
+        /* Body & Structure */
+        --main-bg: hsl(0, 0%, 90%);
+        --keypad-bg: hsl(0, 5%, 81%);
+        --screen-bg: hsl(0, 0%, 93%);
+
+        /* Primary Keys (Numbers, Operators) */
+        --key-primary-bg: hsl(45, 7%, 89%);
+        --key-primary-shadow: hsl(35, 11%, 61%);
+        --key-primary-text: hsl(60, 10%, 19%);
+
+        /* Secondary Keys (DEL, RESET) */
+        --key-secondary-bg: hsl(185, 42%, 37%);
+        --key-secondary-shadow: hsl(185, 58%, 25%);
+        --key-secondary-text: #ffffff;
+
+        /* Equal Key */
+        --key-equal-bg: hsl(25, 98%, 40%);
+        --key-equal-shadow: hsl(25, 99%, 27%);
+        --key-equal-text: #ffffff;
+
+        /* Text */
+        --text-primary: hsl(60, 10%, 19%);
+    }
+
+    /* Adjust font size for better mobile display */
+    .top h2 { font-size: 24px; }
+    #displayInput { font-size: 40px; }
+    .inputs button { font-size: 24px; height: 50px; }
+    .key-secondary { font-size: 18px; }
+}
